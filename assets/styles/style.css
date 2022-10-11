@@ -1,0 +1,39 @@
+*{
+  box-sizing: border-box;
+  font-family: 'gotham';
+}
+section{
+  max-width: 1124px;
+  margin: 0px auto;
+}
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 40%;
+  }
+  
+  .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+  
+  .container {
+    padding: 2px 16px;
+  }
+
+
+  @media (min-width: 724px) {
+    div.carousel_wrapper{
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .card {
+      width: 33%;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .card {
+      width: 23%;
+    }
+  }
