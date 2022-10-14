@@ -48,7 +48,7 @@ const showNextFourItems = (operator) => {
     }
 };
 
-showNextFourItems("+"); // Default
+showNextFourItems("0"); // Default
 
 carouselBtnRight.addEventListener("click", () => {
   showNextFourItems("+");
