@@ -2,57 +2,50 @@ let slides = document.getElementsByClassName("carousel_item");
 const carouselBtnLeft = document.getElementById("carousel_arr_left");
 const carouselBtnRight = document.getElementById("carousel_arr_right");
 
+let slide_obj = []
+let arr_obj = []
+slide_length = slides.length - 1
+let count = 0
+
+// Store tag list in a group array eg:
+// [Array(4), Array(4), Array(4), Array(4), Array(2)]
+while (count < slides.length) {
+    arr_obj.push(slides[count])
+    if (arr_obj.length === 4 || count === (slides.length - 1)) {
+        slide_obj.push(arr_obj)
+        arr_obj = []
+    }
+    count += 1
+}
+
 // Check how many group of four
-let slideIndex = Math.ceil(slides.length / 4) - 1;
+let slideIndex = slide_obj.length - 1;
 let counter = 0;
-let item_count = 0;
-let index_0 = 0;
 
 const showNextFourItems = (operator) => {
-  let i;
-  // Hide all items
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
+    // Hide all items
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
 
-  // console.log('counter: ', counter)
-  // console.log('slideIndex: ', slideIndex)
-
-  // Get counter instance
-  if (item_count <= 4 && counter > slideIndex && operator === "+") {
-    // Display 4 items on default.
-    index_0 = 0;
-    item_count = 4;
-    counter = 0;
-  } else {
-    // If the event is positive, increase.
+     // If the event is positive or negative btn, increase or decrease.
     if (operator === "+") {
-      if (counter) {
-        index_0 += 4;
-      }
-      item_count += 4;
-      counter += 1;
-    } else if (operator === "-" && item_count >= 4 && counter >= 0) {
-      // If the event is negative, decrease.
-      index_0 = 4;
-      counter -= 1;
-      if (item_count > 4) {
-        item_count -= 4;
-        console.log("item_count.....: ", item_count);
-      }
+        counter += 1;
+        if (counter > slideIndex) {
+            counter = 0;
+        }
+    } else if (operator === "-") {
+        counter -= 1;
+        if (counter < 0) {
+            counter = slideIndex;
+        }
     }
-  }
 
-  // console.log('index_0: ', index_0)
-  // console.log('item_count+4: ', item_count)
-  // console.log('')
-
-  // Display 4 items
-  for (i = index_0; i < item_count; i++) {
-    if (slides[i]) {
-      slides[i].style.display = "block";
+    // Display items on an array.
+    for (let tag = 0; tag < slide_obj[counter].length; tag++) {
+        let tags_arr = slide_obj[counter][tag];
+        tags_arr.style.display = "block";
     }
-  }
 };
 
 showNextFourItems("+"); // Default
